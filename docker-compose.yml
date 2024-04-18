@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  jupitertest:
+    container_name: jupitertest
+    build: 
+      context: .
+      dockerfile: Dockerfile   
+    user: root
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./jupiter-data/users:/home 
+    deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: all
+                capabilities: [ gpu ]
